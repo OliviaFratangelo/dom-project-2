@@ -103,28 +103,49 @@ function newGame() {
     return new Game();
 }
 
-const input = document.getElementById("playersGuess");
-const startOverButton = document.getElementById("myButton");
+const input = document.getElementById("guessSubmission");
+const playersGuess = document.getElementById("playersGuess")
+const button = document.getElementById("hintButton");
 const guessesLeft = document.getElementById("guessesLeft");
 const winningNumber = document.getElementById("winningNumber");
+const Check = document.getElementById("Check");
+const hint = document.getElementById("Hint");
+const pastGuesses = document.getElementById("pastGuesses");
 
 const gameInstance = newGame();
 
-input.addEventListener("input", () => {
-  const number = parseInt(input.value);
-
-  try {
-    gameInstance.playersGuessSubmission(number);
-    console.log("Success!");
-  } catch (error) {
-    console.error(error.message);
-  }
+input.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); 
+      try {
+        const number = parseInt(input.value.trim());
+        const result = gameInstance.playersGuessSubmission(number)
+        let guesses = 5;
+        console.log("Success!");
+        input.value = "";
+        playersGuess.textContent = `Your Guess: ${number}`
+        Check.textContent = result;
+        pastGuesses.textContent = gameInstance.pastGuesses.join(", ")
+        if(pastGuesses.length != 0) {
+        guesses = 5 - (1 * gameInstance.pastGuesses.length);
+        guessesLeft.textContent = `Guesses Left: ${guesses}`; }
+        } catch (error) {
+        console.error(error.message);
+        Check.textContent = "Error: Please enter a valid number between 1 and 100";
+      }
+       }
 });
 
-startOverButton.addEventListener("click", () => {
-  gameInstance = newGame();
-  console.log("Game started over!");
+button.addEventListener("click", () => {
+    const hintArray = gameInstance.provideHint();
+    hint.textContent = hintArray.join(", ");
 });
+
+
+
+
+
+
 
 
   

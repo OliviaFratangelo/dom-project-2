@@ -11,12 +11,14 @@
     <div class="container">
       <h1>Guessing Game</h1>
       <h4>Try to Guess the Winning Number Between 1-100</h4>
-      <input type="text" id = "playersGuess"><br>
-      <button onclick = "newGame()" id="myButton">Start Over</button>
-      <p id="guessesLeft"> You have 5 more guesses</p>
-      <p id="winningNumber">Winning Number: ???</p>
+      <input type="text" id = "guessSubmission"><br>
+      <button id="hintButton">Get a Hint</button>
+      <p id="guessesLeft"> Guesses Left: </p>
+      <p id="playersGuess">Your Guess: </p>
+      <p id="pastGuesses">Past Guesses: </p>
+      <p id="Check"> </p>
+      <p id="Hint"> </p>
     </div>
     <script src='js/guessing-game.js'></script> 
-    <!-- uncomment the script tag above when you are ready to add JavaScript to your document -->
   </body>
 </html>
