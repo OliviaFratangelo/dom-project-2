@@ -8,8 +8,17 @@
 
 input {
     background-color: white;
+    margin-bottom: 1rem;
 }
 button {
     background-color: white;
+    text-align: center;
+    height: 120%;
+    width: 15%;
 }
 
+img {
+    height: 50%;
+    width: 50%;
+    margin-top: 2rem;
+}
