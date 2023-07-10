@@ -105,13 +105,13 @@ function newGame() {
 
 const input = document.getElementById("guessSubmission");
 const playersGuess = document.getElementById("playersGuess")
-const button = document.getElementById("hintButton");
+const hintButton = document.getElementById("hintButton");
 const guessesLeft = document.getElementById("guessesLeft");
 const winningNumber = document.getElementById("winningNumber");
 const Check = document.getElementById("Check");
 const hint = document.getElementById("Hint");
 const pastGuesses = document.getElementById("pastGuesses");
-
+const resetButton = document.getElementById("resetButton");
 const gameInstance = newGame();
 
 input.addEventListener("keyup", (event) => {
@@ -120,15 +120,14 @@ input.addEventListener("keyup", (event) => {
       try {
         const number = parseInt(input.value.trim());
         const result = gameInstance.playersGuessSubmission(number)
-        let guesses = 5;
+        guesses = 5
         console.log("Success!");
         input.value = "";
-        playersGuess.textContent = `Your Guess: ${number}`
+        playersGuess.textContent = `Your Guess: ${number}`;
         Check.textContent = result;
-        pastGuesses.textContent = gameInstance.pastGuesses.join(", ")
-        if(pastGuesses.length != 0) {
-        guesses = 5 - (1 * gameInstance.pastGuesses.length);
-        guessesLeft.textContent = `Guesses Left: ${guesses}`; }
+        pastGuesses.textContent = "Past Guesses: " + gameInstance.pastGuesses.join(", ");
+        const guessesLeftCount = 5 - gameInstance.pastGuesses.length;
+      guessesLeft.textContent = `Guesses Left: ${Math.max(0, guessesLeftCount)}`;
         } catch (error) {
         console.error(error.message);
         Check.textContent = "Error: Please enter a valid number between 1 and 100";
@@ -136,10 +135,22 @@ input.addEventListener("keyup", (event) => {
        }
 });
 
-button.addEventListener("click", () => {
+hintButton.addEventListener("click", () => {
     const hintArray = gameInstance.provideHint();
     hint.textContent = hintArray.join(", ");
 });
+
+resetButton.addEventListener("click", () => {
+    gameInstance.playersGuess = null;
+    gameInstance.pastGuesses = [];
+    gameInstance.winningNumber = generateWinningNumber();
+    console.log("Game reset!");
+    guessesLeft.textContent = "Guesses Left: 5";
+    pastGuesses.textContent = "Past Guesses: ";
+  });
+  
+  
+
 
 
 
