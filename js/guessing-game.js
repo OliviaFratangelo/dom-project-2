@@ -145,8 +145,11 @@ resetButton.addEventListener("click", () => {
     gameInstance.pastGuesses = [];
     gameInstance.winningNumber = generateWinningNumber();
     console.log("Game reset!");
+    playersGuess.textContent = "Your Guess: ";
     guessesLeft.textContent = "Guesses Left: 5";
     pastGuesses.textContent = "Past Guesses: ";
+    Check.textContent = " ";
+    hint.textContent = " ";
   });
   
   
